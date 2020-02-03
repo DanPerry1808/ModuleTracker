@@ -1,11 +1,13 @@
 
+import json
+
 class ModuleList:
 
     def __init__(self, name, mods):
-    """
-    name: String - identifier for this list of modules
-    mods: Module[] - the list of modules
-    """
+        """
+        name: String - identifier for this list of modules
+        mods: Module[] - the list of modules
+        """
         self.name = name
         self.modules = mods
 

@@ -1,0 +1,397 @@
+{
+    "name":"test",
+    "modules": [
+      {
+        "name":"COM1001",
+        "credits":20,
+        "assessments": [
+          {
+            "name":"MOLE Quiz",
+            "weight_fraction":[1, 6],
+            "mark":0,
+            "max_mark":30,
+            "complete": false
+          },
+          {
+            "name":"Team Requirements",
+            "weight_fraction":[1, 6],
+            "mark":0,
+            "max_mark":100,
+            "complete": false
+          },
+          {
+            "name":"Individual Ruby",
+            "weight_fraction":[1, 6],
+            "mark":0,
+            "max_mark":100,
+            "complete": false
+          },
+          {
+            "name":"Iteration 1",
+            "weight_fraction":[1, 5],
+            "mark":0,
+            "max_mark":100,
+            "complete": false
+          },
+          {
+            "name":"Iteration 2",
+            "weight_fraction":[3, 10],
+            "mark":0,
+            "max_mark":100,
+            "complete": false
+          }
+        ]
+      },
+      {
+        "name":"COM1002",
+        "credits":20,
+        "assessments": [
+          {
+            "name":"Exercise Sheet 1",
+            "weight_fraction": [75, 2000],
+            "mark":0,
+            "max_mark":100,
+            "complete": false
+          },
+          {
+            "name":"Exercise Sheet 2",
+            "weight_fraction": [75, 2000],
+            "mark":0,
+            "max_mark":100,
+            "complete": false
+          },
+          {
+            "name":"Exercise Sheet 3",
+            "weight_fraction": [75, 2000],
+            "mark":0,
+            "max_mark":100,
+            "complete": false
+          },
+          {
+            "name":"Exercise Sheet 4",
+            "weight_fraction": [75, 2000],
+            "mark":0,
+            "max_mark":100,
+            "complete": false
+          },
+          {
+            "name":"MOLE Quiz 1",
+            "weight_fraction": [35, 200],
+            "mark":0,
+            "max_mark":100,
+            "complete": false
+          },
+          {
+            "name":"MOLE Quiz 2",
+            "weight_fraction": [35, 200],
+            "mark":0,
+            "max_mark":80,
+            "complete": false
+          },
+          {
+            "name":"Exam",
+            "weight_fraction": [1, 2],
+            "mark":0,
+            "max_mark":100,
+            "complete": false
+          }
+        ]
+      },
+      {
+        "name":"COM1003",
+        "credits":20,
+        "assessments":[
+          {
+            "name":"Sem 1 MOLE Quiz 1",
+            "weight_fraction": [8, 100],
+            "mark":0,
+            "max_mark":80,
+            "complete": false
+          },
+          {
+            "name":"Sem 1 MOLE Quiz 2",
+            "weight_fraction": [8, 100],
+            "mark":0,
+            "max_mark":80,
+            "complete": false
+          },
+          {
+            "name":"Sem 1 MOLE Quiz 3",
+            "weight_fraction": [8, 100],
+            "mark":0,
+            "max_mark":80,
+            "complete": false
+          },
+          {
+            "name":"Sem 1 Assignment 1",
+            "weight_fraction": [6, 100],
+            "mark":0,
+            "max_mark":100,
+            "complete": false
+          },
+          {
+            "name":"Sem 1 Assignment 2",
+            "weight_fraction": [1, 10],
+            "mark":0,
+            "max_mark":100,
+            "complete": false
+          },
+          {
+            "name":"Sem 1 Assignment 3",
+            "weight_fraction": [1, 10],
+            "mark":0,
+            "max_mark":100,
+            "complete": false
+          },
+          {
+            "name":"Sem 2 MOLE Quiz 1",
+            "weight_fraction": [5, 200],
+            "mark":0,
+            "max_mark":5,
+            "complete": false
+          },
+          {
+            "name":"Sem 2 MOLE Quiz 2",
+            "weight_fraction": [5, 200],
+            "mark":0,
+            "max_mark":5,
+            "complete": false
+          },
+          {
+            "name":"Sem 2 MOLE Quiz 3",
+            "weight_fraction": [5, 200],
+            "mark":0,
+            "max_mark":5,
+            "complete": false
+          },
+          {
+            "name":"Sem 2 MOLE Quiz 4",
+            "weight_fraction": [5, 200],
+            "mark":0,
+            "max_mark":5,
+            "complete": false
+          },
+          {
+            "name":"Sem 2 MOLE Quiz 5",
+            "weight_fraction": [5, 200],
+            "mark":0,
+            "max_mark":5,
+            "complete": false
+          },
+          {
+            "name":"Problem Sheet 1",
+            "weight_fraction": [1, 20],
+            "mark":0,
+            "max_mark":10,
+            "complete": false
+          },
+          {
+            "name":"Problem Sheet 2",
+            "weight_fraction": [1, 20],
+            "mark":0,
+            "max_mark":10,
+            "complete": false
+          },
+          {
+            "name":"Sem 2 Assignment",
+            "weight_fraction": [275, 1000],
+            "mark":0,
+            "max_mark":55,
+            "complete": false
+          }
+        ]
+      },
+      {
+        "name":"COM1005",
+        "credits":20,
+        "assessments": [
+          {
+            "name":"Lab 1",
+            "weight_fraction": [4, 100],
+            "mark":0,
+            "max_mark":2,
+            "complete": false
+          },
+          {
+            "name":"Lab 2",
+            "weight_fraction": [4, 100],
+            "mark":0,
+            "max_mark":2,
+            "complete": false
+          },
+          {
+            "name":"Lab 3",
+            "weight_fraction": [4, 100],
+            "mark":0,
+            "max_mark":2,
+            "complete": false
+          },
+          {
+            "name":"Lab 4",
+            "weight_fraction": [4, 100],
+            "mark":0,
+            "max_mark":2,
+            "complete": false
+          },
+          {
+            "name":"Lab 5",
+            "weight_fraction": [4, 100],
+            "mark":0,
+            "max_mark":2,
+            "complete": false
+          },
+          {
+            "name":"MOLE Quiz 1",
+            "weight_fraction": [15, 100],
+            "mark":0,
+            "max_mark":60,
+            "complete": false
+          },
+          {
+            "name":"MOLE Quiz 2",
+            "weight_fraction": [15, 100],
+            "mark":0,
+            "max_mark":50,
+            "complete": false
+          },
+          {
+            "name":"Assignment 1",
+            "weight_fraction": [125, 1000],
+            "mark":0,
+            "max_mark":100,
+            "complete": false
+          },
+          {
+            "name":"Assignment 2",
+            "weight_fraction": [125, 1000],
+            "mark":0,
+            "max_mark":100,
+            "complete": false
+          },
+          {
+            "name":"Exam",
+            "weight_fraction": [1, 4],
+            "mark":0,
+            "max_mark":100,
+            "complete": false
+          }
+        ]
+      },
+      {
+        "name":"COM1006",
+        "credits":20,
+        "assessments":[
+          {
+            "name":"MOLE Quiz 1",
+            "weight_fraction": [15, 400],
+            "mark":0,
+            "max_mark":8,
+            "complete": false
+          },
+          {
+            "name":"MOLE Quiz 2",
+            "weight_fraction": [15, 400],
+            "mark":0,
+            "max_mark":8,
+            "complete": false
+          },
+          {
+            "name":"MOLE Quiz 3",
+            "weight_fraction": [15, 400],
+            "mark":0,
+            "max_mark":8,
+            "complete": false
+          },
+          {
+            "name":"MOLE Quiz 4",
+            "weight_fraction": [15, 400],
+            "mark":0,
+            "max_mark":8,
+            "complete": false
+          },
+          {
+            "name":"Exam",
+            "weight_fraction": [85, 100],
+            "mark":0,
+            "max_mark":100,
+            "complete": false
+          }
+        ]
+      },
+      {
+        "name":"COM1008",
+        "credits":10,
+        "assessments":[
+          {
+            "name":"MOLE Quiz 1",
+            "weight_fraction": [1, 10],
+            "mark":0,
+            "max_mark":30,
+            "complete": false
+          },
+          {
+            "name":"MOLE Quiz 2",
+            "weight_fraction": [3, 20],
+            "mark":0,
+            "max_mark":30,
+            "complete": false
+          },
+          {
+            "name":"Assignment 1",
+            "weight_fraction": [1, 2],
+            "mark":0,
+            "max_mark":100,
+            "complete": false
+          },
+          {
+            "name":"Assignment 2",
+            "weight_fraction": [1, 4],
+            "mark":0,
+            "max_mark":25,
+            "complete": false
+          }
+        ]
+      },
+      {
+        "name":"COM1009",
+        "credits":10,
+        "assessments":[
+          {
+            "name":"Exercise Sheet 3",
+            "weight_fraction": [3, 40],
+            "mark":0,
+            "max_mark":20,
+            "complete": false
+          },
+          {
+            "name":"Exercise Sheet 5",
+            "weight_fraction": [3, 40],
+            "mark":0,
+            "max_mark":20,
+            "complete": false
+          },
+          {
+            "name":"Exercise Sheet 7",
+            "weight_fraction": [3, 40],
+            "mark":0,
+            "max_mark":20,
+            "complete": false
+          },
+          {
+            "name":"Exercise Sheet 10",
+            "weight_fraction": [3, 40],
+            "mark":0,
+            "max_mark":20,
+            "complete": false
+          },
+          {
+            "name":"Exam",
+            "weight_fraction": [7, 10],
+            "mark":0,
+            "max_mark":100,
+            "complete": false
+          }
+        ]
+      }
+    ]
+  }
