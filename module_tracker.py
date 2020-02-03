@@ -1,5 +1,6 @@
 
 import json
+import os
 
 class ModuleList:
 
@@ -39,24 +40,45 @@ class Assessment:
         self.marks = marks
         self.complete = complete
 
+def load_json_file(filepath):
+    with open(filepath, "r") as f:
+        mod_set = json.loads(f.read())
+    return mod_set
+
+def help():
+    print("list - Lists all available module sets")
+    print("create <name> - Creates a new module set with the given name")
+    print("load <name> - Loads the module set with that name")
+    print("quit - Exits the program")
+
 # Program entry point
 if __name__ == "__main__":
-    print("Hello world")
-    print("1) Load existing modules")
-    print("2) Create new set of modules")
-    print("3) Quit")
+    print("Module Viewer V0.1")
+    print("-------------------")
+    print("Type 'help' for a command list, or enter a command below:")
+    # Continually take in user commands
+    while True:
+        command = input("> ")
 
-    choice = -1
-    while choice < 1 or choice > 3:
-        try:
-            choice = int(input("> "))
-        except ValueError:
-            print("Enter a number between 1 and 3")
+        # Help command displays list of commands
+        if command == "help":
+            help()
+        # Quit command exits the program
+        elif command == "quit":
+            quit()
 
-    if choice == 1:
-        pass
-    if choice == 2:
-        pass
-    if choice == 3:
-        print("Goodbye")
-        quit()
+        # Commands with arguments need to be split up into a list
+        command_split = command.split()
+
+        # Load command loads a module set from a JSON file
+        if command_split[0] == "load":
+            # Check additonal argument is provided
+            if len(command_split) == 2:
+                # Check file actually exists
+                filepath = os.path.join("saves/" + command_split[1] + ".json")
+                if os.path.isfile(filepath):
+                    load_json_file(filepath)
+                else:
+                    print("Error: Could not find a json file at " + filepath)
+            else:
+                print("Error: Please provide a name for the load command")
