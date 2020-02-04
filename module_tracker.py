@@ -51,6 +51,11 @@ def create_json_file(filepath, mod_set):
         f.write(json.dumps(mod_set))
     print("File created successfully")
 
+def list_saves():
+    for file in os.listdir("saves/"):
+        if file.endswith(".json"):
+            print(file[:-5])
+
 def int_input(prompt):
     value = 0
     while True:
@@ -190,8 +195,8 @@ def create_module_set(name):
     return module_set
 
 def help():
-    print("list - Lists all available module sets")
     print("create <name> - Creates a new module set with the given name")
+    print("list - Lists all available module sets")
     print("load <name> - Loads the module set with that name")
     print("quit - Exits the program")
 
@@ -207,6 +212,8 @@ if __name__ == "__main__":
         # Help command displays list of commands
         if command == "help":
             help()
+        elif command == "list":
+            list_saves()
         # Quit command exits the program
         elif command == "quit":
             quit()
