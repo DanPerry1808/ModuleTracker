@@ -2,6 +2,11 @@
 import json
 import os
 
+# Whether there is a module set currently loaded
+loaded = False
+# The currently loaded module set
+current_set = dict()
+
 class ModuleList:
 
     def __init__(self, name, mods):
@@ -198,6 +203,8 @@ def help():
     print("create <name> - Creates a new module set with the given name")
     print("list - Lists all available module sets")
     print("load <name> - Loads the module set with that name")
+    print("loaded - Prints the name of the currently loaded module set")
+    print("unload - Removes the currently loaded module set from memory")
     print("quit - Exits the program")
 
 # Program entry point
@@ -214,6 +221,18 @@ if __name__ == "__main__":
             help()
         elif command == "list":
             list_saves()
+        elif command == "loaded":
+            print()
+            print("Currently loaded module set:")
+            if loaded:
+                print(current_set["name"])
+            else:
+                print("No module set loaded")
+        elif command == "unload":
+            loaded = False
+            current_set = dict()
+            print()
+            print("Unloaded module set.")
         # Quit command exits the program
         elif command == "quit":
             quit()
@@ -228,14 +247,18 @@ if __name__ == "__main__":
                 # Check file actually exists
                 filepath = os.path.join("saves/" + command_split[1] + ".json")
                 if os.path.isfile(filepath):
-                    load_json_file(filepath)
+                    current_set = load_json_file(filepath)
+                    loaded = True
                 else:
                     print("Error: Could not find a json file at " + filepath)
             else:
                 print("Error: Please provide a file name for the 'load' command")
 
+        # Create command makes a new module set file
         if command_split[0] == "create":
+            # Check name argument is provided
             if len(command_split) == 2:
+                # Check if file already exists (do not overwrite)
                 filepath = os.path.join("saves/" + command_split[1] + ".json")
                 if not os.path.isfile(filepath):
                     mod_set = create_module_set(command_split[1])
