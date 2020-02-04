@@ -1,101 +1,11 @@
-
-import json
 import os
+import file_io
+import user_io
 
 # Whether there is a module set currently loaded
 loaded = False
 # The currently loaded module set
 current_set = dict()
-
-class ModuleList:
-
-    def __init__(self, name, mods):
-        """
-        name: String - identifier for this list of modules
-        mods: Module[] - the list of modules
-        """
-        self.name = name
-        self.modules = mods
-
-class Module:
-
-    def __init__(self, name, credits, assessments):
-        """
-        name: String - Name of this module
-        credits: Int - Number of credits the module is worth
-        assessments: Assessment[] - The marked assessments in this module
-        """
-        self.name = name
-        self.credits = credits
-        self.assessments = assessments
-
-class Assessment:
-
-    def __init__(self, name, weight, max_marks, marks = 0, complete = False):
-        """
-        name: String - Name of this assessment
-        weight: Int - The percentage this assessment is worth to the module
-        max_marks: Int - The maximum number of marks you can get
-        marks: Int - The actual number of marks achieved
-        complete: Boolean - Whether this assessment has been completed yet
-        """
-        self.name = name
-        self.weight = weight
-        self.max_marks = max_marks
-        self.marks = marks
-        self.complete = complete
-
-def load_json_file(filepath):
-    with open(filepath, "r") as f:
-        mod_set = json.loads(f.read())
-    print("File read successfully")
-    return mod_set
-
-def create_json_file(filepath, mod_set):
-    with open(filepath, "w") as f:
-        f.write(json.dumps(mod_set))
-    print("File created successfully")
-
-def list_saves():
-    for file in os.listdir("saves/"):
-        if file.endswith(".json"):
-            print(file[:-5])
-
-def int_input(prompt):
-    value = 0
-    while True:
-        print(prompt)
-        try:
-            value = int(input("> "))
-            break
-        except ValueError:
-            print("Error: Enter an integer value")
-    return value
-
-def float_input(prompt):
-    value = 0
-    while True:
-        print(prompt)
-        try:
-            value = float(input("> "))
-            break
-        except ValueError:
-            print("Error: Enter a number")
-    return value
-    
-
-# Prompts the user to enter either Y or N
-# Returns True on Y and False on N
-def bool_input(prompt):
-    choice = "Q"
-    while choice not in ("Y", "N"):
-        print(prompt)
-        choice = input("> ")
-
-    if choice == "Y":
-        return True
-    else:
-        return False
 
 # Checks if the weight fraction for an assessment is valid
 def valid_weight(weight1, weight2):
@@ -132,20 +42,20 @@ def add_new_assessment():
     weight2 = 0
 
     while not valid_weight(weight1, weight2):
-        weight1 = int_input("Enter weight fraction numerator:")
-        weight2 = int_input("Enter weight fraction denominator:")
+        weight1 = user_io.int_input("Enter weight fraction numerator:")
+        weight2 = user_io.int_input("Enter weight fraction denominator:")
     assessment["weight_fraction"] = [weight1, weight2]
 
     max_mark = -1
     while max_mark < 0:
-        max_mark = float_input("Enter the maximum mark for this assessment:")
+        max_mark = user_io.float_input("Enter the maximum mark for this assessment:")
     assessment["max_mark"] = max_mark
 
-    if bool_input("Has this assessment been completed?"):
+    if user_io.bool_input("Has this assessment been completed?"):
         assessment["complete"] = True
         mark = -1
         while mark < 0 or mark > max_mark:
-            mark = float_input("Enter the mark achieved in this assessment:")
+            mark = user_io.float_input("Enter the mark achieved in this assessment:")
     else:
         assessment["complete"] = False
         mark = 0
@@ -167,7 +77,7 @@ def add_new_module():
 
     credits = -1
     while credits < 0:
-        credits = int_input("Enter the number of credits this module is worth:")
+        credits = user_io.int_input("Enter the number of credits this module is worth:")
     module["credits"] = credits
 
     module["assessments"] = []
@@ -175,7 +85,7 @@ def add_new_module():
     while True:
         module["assessments"].append(add_new_assessment())
 
-        if not bool_input("Would you like to add another assessment? (Y/N)"):
+        if not user_io.bool_input("Would you like to add another assessment? (Y/N)"):
             break
 
     return module
@@ -194,12 +104,15 @@ def create_module_set(name):
     while True:
         module_set["modules"].append(add_new_module())
 
-        if not bool_input("Would you like to add another module/ (Y/N)"):
+        if not user_io.bool_input("Would you like to add another module/ (Y/N)"):
             break
     
     return module_set
 
 def help():
+    print()
+    print("COMMAND LIST")
+    print("----------")
     print("create <name> - Creates a new module set with the given name")
     print("list - Lists all available module sets")
     print("load <name> - Loads the module set with that name")
@@ -220,7 +133,7 @@ if __name__ == "__main__":
         if command == "help":
             help()
         elif command == "list":
-            list_saves()
+            file_io.list_saves()
         elif command == "loaded":
             print()
             print("Currently loaded module set:")
@@ -228,6 +141,7 @@ if __name__ == "__main__":
                 print(current_set["name"])
             else:
                 print("No module set loaded")
+        # Unload command removes the currently selected module from memory
         elif command == "unload":
             loaded = False
             current_set = dict()
@@ -247,7 +161,7 @@ if __name__ == "__main__":
                 # Check file actually exists
                 filepath = os.path.join("saves/" + command_split[1] + ".json")
                 if os.path.isfile(filepath):
-                    current_set = load_json_file(filepath)
+                    current_set = file_io.load_json_file(filepath)
                     loaded = True
                 else:
                     print("Error: Could not find a json file at " + filepath)
@@ -262,7 +176,7 @@ if __name__ == "__main__":
                 filepath = os.path.join("saves/" + command_split[1] + ".json")
                 if not os.path.isfile(filepath):
                     mod_set = create_module_set(command_split[1])
-                    create_json_file(filepath, mod_set)
+                    file_io.create_json_file(filepath, mod_set)
                 else:
                     print("Error: Module set with that name already exists")
             else:
