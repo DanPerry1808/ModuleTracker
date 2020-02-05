@@ -129,4 +129,4 @@ dmypy.json
 .pyre/
 
 # JSON module set saves
-/saves
+saves/*

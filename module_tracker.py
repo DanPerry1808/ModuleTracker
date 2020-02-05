@@ -133,11 +133,57 @@ def print_module_info():
         print(str(assess_complete) + "/" + str(len(mod["assessments"])) + " assessments completed")
         print()
 
+# Allows the user to choose one of the modules from the currently loaded set
+# Returns the index of the chosen module in the current_set["modules"] list
+def choose_module():
+    print()
+    print("Enter the number of the module you want to select")
+    for i, mod in enumerate(current_set["modules"], start=1):
+        print(str(i) + ") " + mod["name"])
+    choice = -1
+    num_mods = len(current_set["modules"])
+    while choice < 1 or choice > num_mods:
+        choice = user_io.int_input()
+    return choice - 1
+
+# Allows the user to change the details of a module then rewrites that to the file
+def edit_module(index):
+    print()
+    print("Currently editing: " + current_set["modules"][index]["name"])
+    print("Please enter the number of the option you want: ")
+    print("1) Edit module name")
+    print("2) Edit number of credits")
+    
+    # Allow user to choose which attribute to change
+    choice = -1
+    while choice < 1 or choice > 2:
+        choice = user_io.int_input()
+    
+    # Name changing
+    if choice == 1:
+        new_name = ""
+        while new_name == "":
+            print("Enter the new module name:")
+            new_name = input("> ")
+        
+        current_set["modules"][index]["name"] = new_name
+    else:
+        # Credit amount changing
+        new_creds = -1
+        while new_creds < 0:
+            new_creds = user_io.int_input("Enter the new number of credits")
+            current_set["modules"][index]["credits"] = new_creds
+
+    # Rewrites file
+    filepath = file_io.get_filepath(current_set["name"])
+    file_io.write_json_file(filepath, current_set)
+
 def help():
     print()
     print("COMMAND LIST")
     print("----------")
     print("create <name> - Creates a new module set with the given name")
+    print("editmod - Allows you to edit the details of a module")
     print("list - Lists all available module sets")
     print("load <name> - Loads the module set with that name")
     print("loaded - Prints the name of the currently loaded module set")
@@ -182,6 +228,12 @@ if __name__ == "__main__":
                 print_module_info()
             else:
                 print("No module loaded. No information to show.")
+        elif command == "editmod":
+            if loaded:
+                selected_mod = choose_module()
+                edit_module(selected_mod)
+            else:
+                print("Cannot edit module. No module set is loaded.")
         # Quit command exits the program
         elif command == "quit":
             quit()

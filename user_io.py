@@ -1,9 +1,10 @@
 # Prints the prompt and gets input from the user
 # Only accepts an integer
-def int_input(prompt):
+def int_input(prompt=None):
     value = 0
     while True:
-        print(prompt)
+        if prompt != None:
+            print(prompt)
         try:
             value = int(input("> "))
             break
