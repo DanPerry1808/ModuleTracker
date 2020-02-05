@@ -148,6 +148,20 @@ def choose_module():
         choice = user_io.int_input()
     return choice - 1
 
+# Allows the user to choose one of the assessment from the module with the
+# given index in current_set
+# Returns the index of the chosen assessment in the module["assessment"] list
+def choose_assessment(mod_index):
+    print()
+    print("Enter the number of the assessment you want to select")
+    for i, assess in enumerate(current_set["modules"][mod_index]["assessments"], start=1):
+        print(str(i) + ") " + assess["name"])
+    choice = -1
+    num_assess = len(current_set["modules"][mod_index]["assessments"])
+    while choice < 1 or choice > num_assess:
+        choice = user_io.int_input()
+    return choice - 1
+
 # Allows the user to change the details of a module then rewrites that to the file
 def edit_module(index):
     print()
@@ -180,11 +194,80 @@ def edit_module(index):
     filepath = file_io.get_filepath(current_set["name"])
     file_io.write_json_file(filepath, current_set)
 
+# Allows the user to edit an attribute of one assessment
+def edit_assess(mod_index, assess_index):
+    current_mod = current_set["modules"][mod_index]
+    current_assess = current_mod["assessments"][assess_index]
+    print()
+    print("Currently editing " + current_mod["assessments"][assess_index]["name"] + " in " + current_mod["name"])
+    print("Please enter the number of the option you want:")
+    print("1) Edit assessment name")
+    print("2) Edit assessment weight")
+    
+    if current_assess["complete"]:
+        print("3) Edit mark")
+    else:
+        print("3) Set mark")
+
+    print("4) Edit maximum mark")
+
+    if current_assess["complete"]:
+        print("5) Reset as incomplete")
+
+    max_choice = -1
+    if current_assess["complete"]:
+        max_choice = 5
+    else:
+        max_choice = 4
+    
+    choice = -1
+    while choice < 1 or choice > max_choice:
+        choice = user_io.int_input()
+    
+    if choice == 1:
+        new_name = ""
+        while new_name == "":
+            print()
+            print("Enter new module name:")
+            new_name = input("> ")
+        
+        current_set["modules"][mod_index]["assessments"][assess_index]["name"] = new_name
+    elif choice == 2:
+        weight1 = 0
+        weight2 = 0
+
+        while not valid_weight(weight1, weight2):
+            weight1 = user_io.int_input("Enter weight fraction numerator:")
+            weight2 = user_io.int_input("Enter weight fraction denominator:")
+        current_set["modules"][mod_index]["assessments"][assess_index]["weight_fraction"] = [weight1, weight2]
+    elif choice == 3:
+        mark = -1
+        while mark < 0 or mark > current_assess["max_mark"]:
+            mark = user_io.float_input("Enter the mark for this assessment:")
+        current_set["modules"][mod_index]["assessments"][assess_index]["mark"] = mark
+        current_set["modules"][mod_index]["assessments"][assess_index]["complete"] = True
+    elif choice == 4:
+        max_mark = -1
+        while max_mark < 0:
+            max_mark = user_io.float_input("Enter the maximum mark for this assessment:")
+        current_set["modules"][mod_index]["assessments"][assess_index]["max_mark"] = max_mark
+    elif choice == 5:
+        # Resetting the assessment as incomplete will set complete to false and mark to 0
+        current_set["modules"][mod_index]["assessments"][assess_index]["mark"] = 0
+        current_set["modules"][mod_index]["assessments"][assess_index]["complete"] = False
+    
+    # Rewrites file
+    filepath = file_io.get_filepath(current_set["name"])
+    file_io.write_json_file(filepath, current_set)
+
+
+# Prints list of possible commands
 def help():
     print()
     print("COMMAND LIST")
     print("----------")
     print("create <name> - Creates a new module set with the given name")
+    print("editassess - Allows you to edit the details of an assessment")
     print("editmod - Allows you to edit the details of a module")
     print("list - Lists all available module sets")
     print("load <name> - Loads the module set with that name")
@@ -241,6 +324,14 @@ if __name__ == "__main__":
                 edit_module(selected_mod)
             else:
                 print("Cannot edit module. No module set is loaded.")
+        # Editassess command allows you to edit attributes of an assessment
+        elif command == "editassess":
+            if loaded:
+                selected_mod = choose_module()
+                selected_assess = choose_assessment(selected_mod)
+                edit_assess(selected_mod, selected_assess)
+            else:
+                print("Cannot edit assessment. No module set is loaded")
         # Quit command exits the program
         elif command == "quit":
             quit()
