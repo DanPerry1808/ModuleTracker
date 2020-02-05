@@ -1,3 +1,4 @@
+import sys
 import os
 import file_io
 import user_io
@@ -110,6 +111,17 @@ def create_module_set(name):
     
     return module_set
 
+def load_mod_set(name):
+    # Check file actually exists
+    filepath = file_io.get_filepath(name)
+    if os.path.isfile(filepath):
+        global current_set
+        global loaded
+        current_set = file_io.load_json_file(filepath)
+        loaded = True
+    else:
+        print("Error: Could not find a json file at " + filepath)
+
 # Outputs the following information about each module in the currently loaded set:
 # Name, number of assessments completed
 def print_module_info():
@@ -137,6 +149,11 @@ def help():
 if __name__ == "__main__":
     print("Module Viewer V0.1")
     print("-------------------")
+
+    # If user gives name of file to load in arguments, load it
+    if(len(sys.argv) == 2):
+            load_mod_set(sys.argv[1])
+
     print("Type 'help' for a command list, or enter a command below:")
     # Continually take in user commands
     while True:
@@ -176,13 +193,7 @@ if __name__ == "__main__":
         if command_split[0] == "load":
             # Check additonal argument is provided
             if len(command_split) == 2:
-                # Check file actually exists
-                filepath = os.path.join("saves/" + command_split[1] + ".json")
-                if os.path.isfile(filepath):
-                    current_set = file_io.load_json_file(filepath)
-                    loaded = True
-                else:
-                    print("Error: Could not find a json file at " + filepath)
+                load_mod_set(command_split[1])
             else:
                 print("Error: Please provide a file name for the 'load' command")
 
@@ -191,7 +202,7 @@ if __name__ == "__main__":
             # Check name argument is provided
             if len(command_split) == 2:
                 # Check if file already exists (do not overwrite)
-                filepath = os.path.join("saves/" + command_split[1] + ".json")
+                filepath = file_io.get_filepath(command_split[1])
                 if not os.path.isfile(filepath):
                     mod_set = create_module_set(command_split[1])
                     file_io.write_json_file(filepath, mod_set)

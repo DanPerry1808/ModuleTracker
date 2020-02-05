@@ -21,3 +21,7 @@ def list_saves():
     for file in os.listdir("saves/"):
         if file.endswith(".json"):
             print(file[:-5])
+
+# Generates the filepath to the json file with this name
+def get_filepath(name):
+    return os.path.join("saves/", name + ".json")
