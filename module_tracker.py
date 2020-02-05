@@ -127,9 +127,11 @@ def load_mod_set(name):
 def print_module_info():
     print()
     print("Information on modules in set " + current_set["name"])
+    print("----------")
     for i, mod in enumerate(current_set["modules"], start=1):
         assess_complete = info.get_completed_assess(mod)
         print(str(i) + ") " + mod["name"])
+        print(str(mod["credits"]) + " credits")
         print(str(assess_complete) + "/" + str(len(mod["assessments"])) + " assessments completed")
         print()
 
@@ -200,16 +202,19 @@ if __name__ == "__main__":
     if(len(sys.argv) == 2):
             load_mod_set(sys.argv[1])
 
-    print("Type 'help' for a command list, or enter a command below:")
     # Continually take in user commands
     while True:
+        print()
+        print("Type 'help' for a command list, or enter a command below:")
         command = input("> ")
 
         # Help command displays list of commands
         if command == "help":
             help()
+        # List command displays all module sets in the saves folder
         elif command == "list":
             file_io.list_saves()
+        # Displays the name of the currently loaded module set
         elif command == "loaded":
             print()
             print("Currently loaded module set:")
@@ -223,11 +228,13 @@ if __name__ == "__main__":
             current_set = dict()
             print()
             print("Unloaded module set.")
+        # Infomods command prints out info about currently loaded modules
         elif command == "infomods":
             if loaded:
                 print_module_info()
             else:
                 print("No module loaded. No information to show.")
+        # Editmod command allows you to edit attributes of a module
         elif command == "editmod":
             if loaded:
                 selected_mod = choose_module()

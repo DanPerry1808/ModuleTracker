@@ -18,6 +18,9 @@ def write_json_file(filepath, mod_set):
 
 # Lists all the JSON files in the saves directory
 def list_saves():
+    print()
+    print("List of all module sets")
+    print("----------")
     for file in os.listdir("saves/"):
         if file.endswith(".json"):
             print(file[:-5])
