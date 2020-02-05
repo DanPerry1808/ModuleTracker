@@ -1,6 +1,7 @@
 import os
 import file_io
 import user_io
+import module_info as info
 
 # Whether there is a module set currently loaded
 loaded = False
@@ -109,6 +110,17 @@ def create_module_set(name):
     
     return module_set
 
+# Outputs the following information about each module in the currently loaded set:
+# Name, number of assessments completed
+def print_module_info():
+    print()
+    print("Information on modules in set " + current_set["name"])
+    for i, mod in enumerate(current_set["modules"], start=1):
+        assess_complete = info.get_completed_assess(mod)
+        print(str(i) + ") " + mod["name"])
+        print(str(assess_complete) + "/" + str(len(mod["assessments"])) + " assessments completed")
+        print()
+
 def help():
     print()
     print("COMMAND LIST")
@@ -117,6 +129,7 @@ def help():
     print("list - Lists all available module sets")
     print("load <name> - Loads the module set with that name")
     print("loaded - Prints the name of the currently loaded module set")
+    print("infomods - Prints information on the modules in the set currently loaded")
     print("unload - Removes the currently loaded module set from memory")
     print("quit - Exits the program")
 
@@ -147,6 +160,11 @@ if __name__ == "__main__":
             current_set = dict()
             print()
             print("Unloaded module set.")
+        elif command == "infomods":
+            if loaded:
+                print_module_info()
+            else:
+                print("No module loaded. No information to show.")
         # Quit command exits the program
         elif command == "quit":
             quit()
@@ -176,7 +194,7 @@ if __name__ == "__main__":
                 filepath = os.path.join("saves/" + command_split[1] + ".json")
                 if not os.path.isfile(filepath):
                     mod_set = create_module_set(command_split[1])
-                    file_io.create_json_file(filepath, mod_set)
+                    file_io.write_json_file(filepath, mod_set)
                 else:
                     print("Error: Module set with that name already exists")
             else:

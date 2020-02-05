@@ -10,7 +10,8 @@ def load_json_file(filepath):
     return mod_set
 
 # Creates a JSON file from the dictionary provided at the given filepath
-def create_json_file(filepath, mod_set):
+# Can also be used to update a JSON file by overwriting it
+def write_json_file(filepath, mod_set):
     with open(filepath, "w") as f:
         f.write(json.dumps(mod_set))
     print("File created successfully")
