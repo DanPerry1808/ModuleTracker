@@ -124,7 +124,7 @@ def load_mod_set(name):
 
 # Given a percentage out of 100, converts this into a bar of hashes and hyphens
 # to form a progress bar
-def print_hashes(perc):
+def print_perc_bar(perc):
     length = 20
     conv_rate = length / 100
     num_hashes = round(conv_rate * perc)
@@ -136,6 +136,23 @@ def print_hashes(perc):
             print("-", end="")
     print("]")
 
+# Given the percentage of marks gotten and the percentage of marks lost, outputs
+# this into a progres bar of hashes, hyphens and crosses
+def print_progress_bar(perc_got, perc_lost):
+    length = 20
+    conv_rate = length/100
+    num_hashes = round(conv_rate * perc_got)
+    num_crosses = round(conv_rate * perc_lost)
+    print("[", end="")
+
+    for i in range(length):
+        if i < num_hashes:
+            print("#", end="")
+        elif i >= length - num_crosses:
+            print("X", end="")
+        else:
+            print("-", end="")
+    print("]")
 
 # Outputs the following information about each module in the currently loaded set:
 # Name, number of assessments completed
@@ -152,13 +169,14 @@ def print_module_info():
             av_grade = info.get_average_grade(mod)
             print("Average percentage: " + str(av_grade) + "%")
             print("Grade: " + info.perc_to_grade(av_grade))
-            print_hashes(av_grade)
+            print_perc_bar(av_grade)
             print()
 
-            total_grade = info.get_total_grade(mod)
+            total_grade = info.get_total_perc(mod)
+            perc_lost = info.get_perc_lost(mod)
             print("Total percentage: " + str(total_grade) + "%")
             print("Grade: " + info.perc_to_grade(total_grade))
-            print_hashes(total_grade)
+            print_progress_bar(total_grade, perc_lost)
             highest_poss = info.get_uncomplete_perc(mod) + total_grade
             print("Highest possible percentage: " + str(highest_poss))
             print("Highest possible grade: " + info.perc_to_grade(highest_poss))
