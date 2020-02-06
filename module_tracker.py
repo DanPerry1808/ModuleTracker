@@ -106,7 +106,7 @@ def create_module_set(name):
     while True:
         module_set["modules"].append(add_new_module())
 
-        if not user_io.bool_input("Would you like to add another module/ (Y/N)"):
+        if not user_io.bool_input("Would you like to add another module? (Y/N)"):
             break
     
     return module_set
@@ -320,6 +320,7 @@ def help():
     print("create <name> - Creates a new module set with the given name")
     print("editassess - Allows you to edit the details of an assessment")
     print("editmod - Allows you to edit the details of a module")
+    print("help - Prints this help dialog")
     print("list - Lists all available module sets")
     print("load <name> - Loads the module set with that name")
     print("loaded - Prints the name of the currently loaded module set")
