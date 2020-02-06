@@ -342,6 +342,7 @@ if __name__ == "__main__":
         print()
         print("Type 'help' for a command list, or enter a command below:")
         command = input("> ")
+        command_split = command.split()
 
         # Help command displays list of commands
         if command == "help":
@@ -387,9 +388,6 @@ if __name__ == "__main__":
         # Quit command exits the program
         elif command == "quit":
             quit()
-
-        # Commands with arguments need to be split up into a list
-        command_split = command.split()
 
         # Load command loads a module set from a JSON file
         if command_split[0] == "load":

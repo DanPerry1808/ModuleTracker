@@ -3,7 +3,9 @@ A CLI to track progress in university modules.
 
 ## Installation and running the program
 1) Ensure you have Python 3 installed
-2) Download the zip file and extract it
+2) Click on the 'Clone or download' button on this repo and either:
+    2a) Clone this repository from Github. This is the preferred option since you can update it more easily.
+    2b) Download the zip file from the release section and extract it.
 3) Open the terminal/command line on your computer and get python to run the `module_tracker.py` script. (Eg. on Linux `python3 module_tracker.py`)
 3a) As an optional step, you can specify a module set to load from the command line by specifying the name of the module set after the file name (Eg. `python3 module_tracker.py first_year`)
 4) On first start-up, you will probably want to either run the `help` command or create a module using the `create <name>` command.
