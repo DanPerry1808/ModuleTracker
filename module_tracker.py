@@ -159,6 +159,9 @@ def print_module_info():
             print("Total percentage: " + str(total_grade) + "%")
             print("Grade: " + info.perc_to_grade(total_grade))
             print_hashes(total_grade)
+            highest_poss = info.get_uncomplete_perc(mod) + total_grade
+            print("Highest possible percentage: " + str(highest_poss))
+            print("Highest possible grade: " + info.perc_to_grade(highest_poss))
 
         print()
 

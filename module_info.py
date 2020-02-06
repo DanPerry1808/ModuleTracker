@@ -46,3 +46,13 @@ def get_total_grade(mod):
         weight = weight_list[0] / weight_list[1]
         grade += get_assess_percentage(assess) * weight
     return round(grade, 1)
+
+# Gets the percentage of the module made up of uncompleted assessments
+def get_uncomplete_perc(mod):
+    perc = 0
+    for assess in mod["assessments"]:
+        if not assess["complete"]:
+            weight_list = assess["weight_fraction"]
+            weight = weight_list[0] / weight_list[1]
+            perc += weight * 100
+    return round(perc, 1)
