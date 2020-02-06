@@ -38,9 +38,11 @@ def get_average_grade(mod):
     else:
         return None
 
+# Gets the total grade so far based on complete assessments
 def get_total_grade(mod):
     grade = 0
-    num_assess = len(mod["assessments"])
     for assess in mod["assessments"]:
-        grade += get_assess_percentage(assess)
-    return round(grade / num_assess, 1)
+        weight_list = assess["weight_fraction"]
+        weight = weight_list[0] / weight_list[1]
+        grade += get_assess_percentage(assess) * weight
+    return round(grade, 1)
