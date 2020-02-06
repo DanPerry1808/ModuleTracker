@@ -122,6 +122,21 @@ def load_mod_set(name):
     else:
         print("Error: Could not find a json file at " + filepath)
 
+# Given a percentage out of 100, converts this into a bar of hashes and hyphens
+# to form a progress bar
+def print_hashes(perc):
+    length = 20
+    conv_rate = length / 100
+    num_hashes = round(conv_rate * perc)
+    print("[", end="")
+    for i in range(length):
+        if i < num_hashes:
+            print("#", end="")
+        else:
+            print("-", end="")
+    print("]")
+
+
 # Outputs the following information about each module in the currently loaded set:
 # Name, number of assessments completed
 def print_module_info():
@@ -133,6 +148,18 @@ def print_module_info():
         print(str(i) + ") " + mod["name"])
         print(str(mod["credits"]) + " credits")
         print(str(assess_complete) + "/" + str(len(mod["assessments"])) + " assessments completed")
+        if assess_complete > 0:
+            av_grade = info.get_average_grade(mod)
+            print("Average percentage: " + str(av_grade) + "%")
+            print("Grade: " + info.perc_to_grade(av_grade))
+            print_hashes(av_grade)
+            print()
+
+            total_grade = info.get_total_grade(mod)
+            print("Total percentage: " + str(total_grade) + "%")
+            print("Grade: " + info.perc_to_grade(total_grade))
+            print_hashes(total_grade)
+
         print()
 
 # Allows the user to choose one of the modules from the currently loaded set
