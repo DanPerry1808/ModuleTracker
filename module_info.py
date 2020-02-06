@@ -1,3 +1,8 @@
+# Provides utility functions for calculating percentages and grades
+# for modules
+
+pass_grade = 40
+
 # Returns the number of completed assessments for the module given
 def get_completed_assess(mod):
     completed = 0
@@ -65,3 +70,20 @@ def get_uncomplete_perc(mod):
             weight = weight_list[0] / weight_list[1]
             perc += weight * 100
     return round(perc, 1)
+
+def get_average_credits(mod_set):
+    credits = 0
+    for mod in mod_set["modules"]:
+        av_grade = get_average_grade(mod)
+        if av_grade != None:
+            if av_grade > pass_grade:
+                credits += mod["credits"]
+    return credits
+
+def get_total_credits(mod_set):
+    credits = 0
+    for mod in mod_set["modules"]:
+        perc = get_total_perc(mod)
+        if perc > pass_grade:
+            credits += mod["credits"]
+    return credits

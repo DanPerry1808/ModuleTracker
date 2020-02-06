@@ -178,10 +178,13 @@ def print_module_info():
             print("Grade: " + info.perc_to_grade(total_grade))
             print_progress_bar(total_grade, perc_lost)
             highest_poss = info.get_uncomplete_perc(mod) + total_grade
-            print("Highest possible percentage: " + str(highest_poss))
+            # This figure has to be rounded to prevent floating point rounding error
+            print("Highest possible percentage: " + str(round(highest_poss, 1)) + "%")
             print("Highest possible grade: " + info.perc_to_grade(highest_poss))
-
         print()
+
+    print("Credits achieved based on current averages: " + str(info.get_average_credits(current_set)))
+    print("Credits achieved based on marks entered so far: " + str(info.get_total_credits(current_set)))
 
 # Allows the user to choose one of the modules from the currently loaded set
 # Returns the index of the chosen module in the current_set["modules"] list
